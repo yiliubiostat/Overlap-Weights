@@ -8,7 +8,6 @@
 ### by Yi Liu
 ### Create date: Nov 16, 2021
 
-
 ### Inverse probability weights
 ATE.boot <- function(y, z, X, X.out=NA, R=1000, RV = "Rad"){
   
