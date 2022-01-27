@@ -1,11 +1,10 @@
-##########################################################################################
-## R Functions for PS Weighting Methods:
-## ATE, ATT, ATC 
-## 
-## Robust standard error estimators were derived by Dr. Roland Matsouaka
-## Functions coded by Yunji Zhou
-##########################################################################################
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+### ~~~~~~~~~~~ PSweight RHC Data Application ~~~~~~~~~~~~~~
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+### Sandwich variance for DR ATT ATC
+
+### by Yunji Zhou
 
 ### Inverse probability weights
 ATE <- function(y, z, X, DR=FALSE, X.out=NA){
