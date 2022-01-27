@@ -7,7 +7,6 @@
 
 ### by Yunji Zhou
 
-
 ### Inverse probability weights
 ATE <- function(y, z, X, DR=FALSE, X.out=NA){
   
