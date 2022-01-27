@@ -1,8 +1,8 @@
-## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-## ~~~~~~~~~~~~~~ What are we weighting for: Data Application I ~~~~~~~~~~
-## ~~~~~~~~~~~~~~ RHC Data Analysis ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## ~~~~~~~~~~~~~~ PSweight RHC Data Application ~~~~~~~~~~~~~~~~~~
+## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-## Data Preparation and Causal Effects
+## Data Cleaning and Causal Estimands
 
 ## Code: Yi Liu
 ## Date: Nov 12, 2021
@@ -112,7 +112,7 @@ sd.t <- round(apply(trt, 2, sd), 2)
 
 descr <- c("Acute MI, peripheral vascular disease, severe cardiovascular symptoms (NYHA-Class III), very severe cardiovascular symptoms (NYHA-Class IV)", 
            "Congestive heart failure",
-           "Dementia, stroke or cerebral infarct, Parkinson¡¯s disease",
+           "Dementia, stroke or cerebral infarct, ParkinsonÂ¡Â¯s disease",
            "Psychiatric history, active psychosis or severe depression",
            "Pulmonary disease",
            "Chronic renal disease, chronic hemodialysis or peritoneal dialysis",
@@ -405,6 +405,3 @@ ATT.wb2 <- data.frame(Est = result$PE, SD = result$Std.Boot, p = 2*(1-pnorm(abs(
 
 save(file = "RHC_VarDR.RData", ATE.sand, ATC.sand, ATT.sand, 
      ATE.wb1, ATE.wb2, ATC.wb1, ATC.wb2, ATT.wb1, ATT.wb2)
-
-
-
