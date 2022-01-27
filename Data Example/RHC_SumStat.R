@@ -41,7 +41,7 @@ atc.mult <- swang2 ~ cardiohx + chfhx + dementhx + psychhx + chrpulhx + renalhx 
 ## Propensity Score Plot
 bal.mult <- SumStat(ps.formula = ps.mult, weight = c("IPW", "overlap", "matching", "entropy"), 
                     data = RHC, delta = 0)
-png("ps_rhc.png", res=72*2, width = 1500, height = 1100)
+png("ps_rhc.png", res=72*2, width = 1200, height = 800)
 plot(bal.mult, type = "hist")
 dev.off()
 
@@ -74,7 +74,7 @@ colnames(bal.ATC) <- c("ASD", "Method", "covar")
 df <- rbind(bal.IPW, bal.IPW.5, bal.IPW.10, bal.IPW.15, bal.ATO, bal.ATM, bal.ATEN, bal.ATT, bal.ATC)
 df$Method <- factor(df$Method, levels = c("ATE", "ATE (0.05)", "ATE (0.1)", "ATE (0.15)", "ATO", "ATM", "ATEN", "ATT", "ATC"))
 
-png("asd_rhc.png", res = 200, width = 1200, height = 1400)
+png("asd_rhc.png", res = 200, width = 1100, height = 1300)
 ggplot(df, aes(x = ASD, y = covar, col = Method)) + geom_point(alpha = 0.85) + 
   labs(x = "Standarized Mean Difference", y = "Covariates") + 
   scale_color_manual(values = c("royalblue", "deepskyblue", "darkseagreen1", 
@@ -129,14 +129,14 @@ load("RHC_VarDR.RData")
 covar <- names(SumStat(ps.formula = ps.mult, weight = "IPW", data = RHC)$IPW.sumstat[, "ASD weighted var 1-2"])
 
 bal.ATT <- as.data.frame(SumStat(ps.formula = ps.mult, weight = "treated", data = RHC)$treated.sumstat[, "ASD weighted var 1-2"]) %>% mutate(type = "ATT", covar = covar)
-colnames(bal.ATT) <- c("ASD", "Method", "covar")
+colnames(bal.ATT) <- c("ASD", "Estimand", "covar")
 bal.ATC <- as.data.frame(SumStat(ps.formula = atc.mult, weight = "treated", data = RHC)$treated.sumstat[, "ASD weighted var 1-2"]) %>% mutate(type = "ATC", covar = covar)
-colnames(bal.ATC) <- c("ASD", "Method", "covar")
+colnames(bal.ATC) <- c("ASD", "Estimand", "covar")
 
 df <- rbind(bal.ATT, bal.ATC)
 
-png("asd_rhc_VarDR.png", res = 200, width = 1200, height = 1400)
-ggplot(df, aes(x = ASD, y = covar, col = Method)) + geom_point(alpha = 0.85) + 
+png("asd_rhc_VarDR.png", res = 200, width = 1050, height = 1350)
+ggplot(df, aes(x = ASD, y = covar, col = Estimand)) + geom_point(alpha = 0.85, size=2) + 
   labs(x = "Standarized Mean Difference", y = "Covariates") + 
   scale_color_manual(values = c("royalblue", "goldenrod2")) + 
   geom_vline(xintercept = c(-0.05, 0.05), linetype = "dashed", color = "black", size = 0.2) + 
@@ -157,16 +157,3 @@ f.table <- data.frame(Effect = rep(c("ATC", "ATT"), 3),
 colnames(f.table) <- cols
 
 print(xtable(f.table, digits = 3), include.rownames=FALSE)
-
-
-
-
-
-
-
-
-
-
-
-
-
