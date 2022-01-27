@@ -3,7 +3,7 @@
 ### ~~~~~~~~~~~~~~~~~~~~ Simulation Study          ~~~~~~~~~~~~~~~~~~~~ ###
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 
-####### Sandwich variance (new), model 2
+####### Sandwich variance (new), Model 2
 
 ### Created by Yi Liu, modified by Yunji Zhou
 ### Create date: Oct 9, 2021
@@ -902,5 +902,3 @@ save(file = "md2_sims.RData",
      c.sim.aug.new.cm, c.sim.aug.old.cm, 
      c.sim.aug.new.mc, c.sim.aug.old.mc, 
      c.sim.aug.new.mm, c.sim.aug.old.mm)
-
-
