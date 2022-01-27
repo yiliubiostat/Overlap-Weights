@@ -1,11 +1,10 @@
-##########################################################################################
-## R Functions for PS Weighting Methods:
-## Wild bootstrap algorithm for variances and CIs for ATE, ATT and ATC 
-## 
-## Bootstrap variance estimators were derived by Dr. Roland Matsouaka
-## Functions coded by Yunji Zhou and Yi Liu
-##########################################################################################
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+### ~~~~~~~~~~ PSweight RHC Data Application ~~~~~~~~~~~~~~~~~~~~
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+### Wild bootstrap variance estimations for DR ATT ATC
+
+### by Yi Liu
 
 ### Inverse probability weights
 ATE.boot <- function(y, z, X, X.out=NA, R=1000, RV = "Rad"){
