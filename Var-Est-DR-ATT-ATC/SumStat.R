@@ -29,7 +29,6 @@ newnames <- c("ATE", "ATE.wbvar", "ATE.lwr", "ATE.upr", "ATE.ifci",
               "ATT", "ATT.wbvar", "ATT.lwr", "ATT.upr", "ATT.ifci",
               "Row.Num")
 
-
 ### Model 1
 load("md1_sims.RData")
 colnames(c.sim.aug.new.cc) <- newnames
@@ -40,7 +39,6 @@ colnames(sim.aug.new.cc) <- newnames
 colnames(sim.aug.new.cm) <- newnames
 colnames(sim.aug.new.mc) <- newnames
 colnames(sim.aug.new.mm) <- newnames
-
 
 table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                     #Truth = rep(4, 6),
@@ -63,7 +61,6 @@ table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                            CP(truth.c, wb1.rad.c.cc), 
                            CP(truth.c, wb1.exp.c.cc)))
 print(xtable(table), include.rownames=FALSE)
-
 
 table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                     #Truth = rep(as.numeric(md1.true_eff[, c("ATC", "ATT")]), 3),
@@ -88,7 +85,6 @@ table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
 
 print(xtable(table), include.rownames=FALSE)
 
-
 table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                     #Truth = rep(4, 6),
                     #Est = rep(c(mean(wb1.rad.c.cm$ATC), mean(wb1.rad.c.cm$ATT)), 3),
@@ -110,7 +106,6 @@ table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                            CP(truth.c, wb1.rad.c.cm), 
                            CP(truth.c, wb1.exp.c.cm)))
 print(xtable(table), include.rownames=FALSE)
-
 
 table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                     #Truth = rep(as.numeric(md1.true_eff[, c("ATC", "ATT")]), 3),
@@ -134,7 +129,6 @@ table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                            CP(md1.true_eff, wb1.exp.h.cm)))
 print(xtable(table), include.rownames=FALSE)
 
-
 table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                     #Truth = rep(4, 6),
                     #Est = rep(c(mean(wb1.rad.c.mc$ATC), mean(wb1.rad.c.mc$ATT)), 3),
@@ -156,7 +150,6 @@ table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                            CP(truth.c, wb1.rad.c.mc), 
                            CP(truth.c, wb1.exp.c.mc)))
 print(xtable(table), include.rownames=FALSE)
-
 
 table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                     #Truth = rep(as.numeric(md1.true_eff[, c("ATC", "ATT")]), 3),
@@ -202,7 +195,6 @@ table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                            CP(truth.c, wb1.exp.c.mm)))
 print(xtable(table), include.rownames=FALSE)
 
-
 table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                     #Truth = rep(as.numeric(md1.true_eff[, c("ATC", "ATT")]), 3),
                     #Est = rep(c(mean(wb1.rad.h.mm$ATC), mean(wb1.rad.h.mm$ATT)), 3),
@@ -225,7 +217,6 @@ table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                            CP(md1.true_eff, wb1.exp.h.mm)))
 print(xtable(table), include.rownames=FALSE)
 
-
 ### Model 2
 load("md2_sims.RData")
 colnames(c.sim.aug.new.cc) <- newnames
@@ -236,7 +227,6 @@ colnames(sim.aug.new.cc) <- newnames
 colnames(sim.aug.new.cm) <- newnames
 colnames(sim.aug.new.mc) <- newnames
 colnames(sim.aug.new.mm) <- newnames
-
 
 table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                     #Truth = rep(4, 6),
@@ -259,7 +249,6 @@ table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                            CP(truth.c, wb2.rad.c.cc), 
                            CP(truth.c, wb2.exp.c.cc)))
 print(xtable(table), include.rownames=FALSE)
-
 
 table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                     #Truth = rep(as.numeric(md2.true_eff[, c("ATC", "ATT")]), 3),
@@ -284,7 +273,6 @@ table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
 
 print(xtable(table), include.rownames=FALSE)
 
-
 table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                     #Truth = rep(4, 6),
                     #Est = rep(c(mean(wb2.rad.c.cm$ATC), mean(wb2.rad.c.cm$ATT)), 3),
@@ -306,7 +294,6 @@ table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                            CP(truth.c, wb2.rad.c.cm), 
                            CP(truth.c, wb2.exp.c.cm)))
 print(xtable(table), include.rownames=FALSE)
-
 
 table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                     #Truth = rep(as.numeric(md2.true_eff[, c("ATC", "ATT")]), 3),
@@ -330,7 +317,6 @@ table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                            CP(md2.true_eff, wb2.exp.h.cm)))
 print(xtable(table), include.rownames=FALSE)
 
-
 table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                     #Truth = rep(4, 6),
                     #Est = rep(c(mean(wb2.rad.c.mc$ATC), mean(wb2.rad.c.mc$ATT)), 3),
@@ -352,7 +338,6 @@ table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                            CP(truth.c, wb2.rad.c.mc), 
                            CP(truth.c, wb2.exp.c.mc)))
 print(xtable(table), include.rownames=FALSE)
-
 
 table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                     #Truth = rep(as.numeric(md2.true_eff[, c("ATC", "ATT")]), 3),
@@ -398,7 +383,6 @@ table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                            CP(truth.c, wb2.exp.c.mm)))
 print(xtable(table), include.rownames=FALSE)
 
-
 table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                     #Truth = rep(as.numeric(md2.true_eff[, c("ATC", "ATT")]), 3),
                     #Est = rep(c(mean(wb2.rad.h.mm$ATC), mean(wb2.rad.h.mm$ATT)), 3),
@@ -432,7 +416,6 @@ colnames(sim.aug.new.cm) <- newnames
 colnames(sim.aug.new.mc) <- newnames
 colnames(sim.aug.new.mm) <- newnames
 
-
 table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                     #Truth = rep(4, 6),
                     #Est = rep(c(mean(wb3.rad.c.cc$ATC), mean(wb3.rad.c.cc$ATT)), 3),
@@ -454,7 +437,6 @@ table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                            CP(truth.c, wb3.rad.c.cc), 
                            CP(truth.c, wb3.exp.c.cc)))
 print(xtable(table), include.rownames=FALSE)
-
 
 table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                     #Truth = rep(as.numeric(md3.true_eff[, c("ATC", "ATT")]), 3),
@@ -478,7 +460,6 @@ table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                            CP(md3.true_eff, wb3.exp.h.cc)))
 print(xtable(table), include.rownames=FALSE)
 
-
 table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                     #Truth = rep(4, 6),
                     #Est = rep(c(mean(wb3.rad.c.cm$ATC), mean(wb3.rad.c.cm$ATT)), 3),
@@ -500,7 +481,6 @@ table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                            CP(truth.c, wb3.rad.c.cm), 
                            CP(truth.c, wb3.exp.c.cm)))
 print(xtable(table), include.rownames=FALSE)
-
 
 table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                     #Truth = rep(as.numeric(md3.true_eff[, c("ATC", "ATT")]), 3),
@@ -524,7 +504,6 @@ table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                            CP(md3.true_eff, wb3.exp.h.cm)))
 print(xtable(table), include.rownames=FALSE)
 
-
 table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                     #Truth = rep(4, 6),
                     #Est = rep(c(mean(wb3.rad.c.mc$ATC), mean(wb3.rad.c.mc$ATT)), 3),
@@ -546,7 +525,6 @@ table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                            CP(truth.c, wb3.rad.c.mc), 
                            CP(truth.c, wb3.exp.c.mc)))
 print(xtable(table), include.rownames=FALSE)
-
 
 table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                     #Truth = rep(as.numeric(md3.true_eff[, c("ATC", "ATT")]), 3),
@@ -614,10 +592,3 @@ table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                            CP(md3.true_eff, wb3.rad.h.mm), 
                            CP(md3.true_eff, wb3.exp.h.mm)))
 print(xtable(table), include.rownames=FALSE)
-
-
-
-
-
-
-
