@@ -31,34 +31,6 @@ dat3 <- meps[meps$asian == 1 | meps$white == 1,
              unlist(sapply(c("white", "healthExp", cov.names), find.var.num, dat = meps))]
 table(dat3$white)
 
-# Design module
-ps.mult <- white ~ pcs + mcs + age + bmi + sinceCheckUp + male + married + h.excellent + h.verygood + 
-  h.good + h.fair + h.poor + mh.excellent + mh.verygood + mh.good + mh.fair + mh.poor + anylim +
-  exercise + hibp + chd + angina + mi + stroke + emphysema + cholesterol + cancer + diabetes + 
-  arthritis + asthma + smoke
-
-out.form <- healthExp ~ pcs + mcs + age + bmi + sinceCheckUp + male + married + h.excellent + h.verygood + 
-  h.good + h.fair + h.poor + mh.excellent + mh.verygood + mh.good + mh.fair + mh.poor + anylim +
-  exercise + hibp + chd + angina + mi + stroke + emphysema + cholesterol + cancer + diabetes + 
-  arthritis + asthma + smoke
-
-### Propensity score plots
-bal.mult <- SumStat(ps.formula = ps.mult, data = dat1, weight = "IPW")
-png("ps_meps_hispanic.png", res=72*2, width = 1200, height = 800)
-plot(bal.mult, type = "hist")
-dev.off()
-
-bal.mult <- SumStat(ps.formula = ps.mult, data = dat2, weight = "IPW")
-png("ps_meps_black.png", res=72*2, width = 1200, height = 800)
-plot(bal.mult, type = "hist")
-dev.off()
-
-bal.mult <- SumStat(ps.formula = ps.mult, data = dat3, weight = "IPW")
-png("ps_meps_asian.png", res=72*2, width = 1200, height = 800)
-plot(bal.mult, type = "hist")
-dev.off()
-
-# Analysis module
 source("newSand_func.R")
 
 ## Hajek-like estimator
