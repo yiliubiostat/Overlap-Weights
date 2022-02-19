@@ -119,7 +119,6 @@ ATE <- function(y, z, X, DR=FALSE, X.out=NA, alpha=0){
     
     VAR <- t(c) %*% sigma %*% c /n
     se <- as.numeric(sqrt(VAR))
-    
   }
   
   # check balance (expected to be zero)
@@ -192,7 +191,8 @@ ATT <- function(y, z, X, DR=FALSE, X.out=NA){
     
     VAR <- t(c) %*% sigma %*% c /n
     se <- as.numeric(sqrt(VAR))
-  }else{ 
+    
+  } else { 
     
     # Doubly robust estimation
     W <- cbind(1,X.out)
@@ -235,7 +235,6 @@ ATT <- function(y, z, X, DR=FALSE, X.out=NA){
     
     VAR <- t(c) %*% sigma %*% c /n
     se <- as.numeric(sqrt(VAR))
-    
   }
   
   # check balance (expected to be zero)
@@ -247,8 +246,6 @@ ATT <- function(y, z, X, DR=FALSE, X.out=NA){
   # output the quantities of interest
   return(list(tau=tau, se=se, asd = asd))
 }
-
-
 
 ### Inverse probability weights for the control
 ATC <- function(y, z, X, DR=FALSE, X.out=NA){
@@ -273,7 +270,6 @@ ATC <- function(y, z, X, DR=FALSE, X.out=NA){
     return(tstat)
   }
   
-  
   # summary statistics
   n1 <- sum(z)             # number of treated
   n0 <- sum(1-z)           # number of untreated
@@ -289,7 +285,6 @@ ATC <- function(y, z, X, DR=FALSE, X.out=NA){
   # point estimate
   mu1.h <- sum(z*y*(1-e.h)/e.h) / sum(z*((1-e.h)/e.h))
   mu0.h <- sum( (1-z)*y* (1) ) / sum((1-z)*(1))
-  
   
   if(DR==FALSE){
     # Non-parametric Estimation
@@ -315,8 +310,7 @@ ATC <- function(y, z, X, DR=FALSE, X.out=NA){
     VAR <- t(c) %*% sigma %*% c /n
     se <- as.numeric(sqrt(VAR))
     
-    
-  }else{ 
+  } else { 
     
     # Doubly robust estimation
     W <- cbind(1,X.out)
@@ -359,7 +353,6 @@ ATC <- function(y, z, X, DR=FALSE, X.out=NA){
     
     VAR <- t(c) %*% sigma %*% c /n
     se <- as.numeric(sqrt(VAR))
-    
   }
   
   # check balance (expected to be zero)
@@ -371,8 +364,6 @@ ATC <- function(y, z, X, DR=FALSE, X.out=NA){
   # output the quantities of interest
   return(list(tau=tau, se=se, asd = asd))
 }
-
-
 
 ### Overlap weights
 ATO <- function(y, z, X, DR=FALSE, X.out=NA){
@@ -436,7 +427,7 @@ ATO <- function(y, z, X, DR=FALSE, X.out=NA){
     VAR <- t(c) %*% sigma %*% c /n
     se <- as.numeric(sqrt(VAR))
     
-  }else{ 
+  } else { 
     
     # Doubly robust estimation
     W <- cbind(1,X.out)
@@ -468,7 +459,6 @@ ATO <- function(y, z, X, DR=FALSE, X.out=NA){
     A.63 <- apply((1-z)*g.h/(1-e.h)*W, 2, mean) # 1 by w vector
     A.66 <- mean((1-z)*g.h/(1-e.h)) # scalar
     
-    
     A.col.1 <- rbind(A.11, matrix(0,nrow = nrow(A.22)+nrow(A.33), ncol = ncol(A.11)), A.41, A.51,A.61)
     A.col.2 <- rbind(matrix(0,nrow = nrow(A.11),ncol = ncol(A.22)),A.22, matrix(0,nrow = nrow(A.33),ncol = ncol(A.22)), A.42, A.52, rep(0, ncol(A.22)))
     A.col.3 <- rbind(matrix(0,nrow = nrow(A.22)+nrow(A.11), ncol = ncol(A.33)), A.33, A.43, rep(0, ncol(A.33)), A.63)
@@ -489,7 +479,6 @@ ATO <- function(y, z, X, DR=FALSE, X.out=NA){
     
     VAR <- t(c) %*% sigma %*% c /n
     se <- as.numeric(sqrt(VAR))
-    
   }
   
   # check balance (expected to be zero)
@@ -564,7 +553,7 @@ ATEN <- function(y, z, X, DR=FALSE, X.out=NA){
     VAR <- t(c) %*% sigma %*% c /n
     se <- as.numeric(sqrt(VAR))
     
-  }else{ 
+  } else { 
     
     # Doubly robust estimation
     W <- cbind(1,X.out)
@@ -596,7 +585,6 @@ ATEN <- function(y, z, X, DR=FALSE, X.out=NA){
     A.63 <- apply((1-z)*g.h/(1-e.h)*W, 2, mean) # 1 by w vector
     A.66 <- mean((1-z)*g.h/(1-e.h)) # scalar
     
-    
     A.col.1 <- rbind(A.11, matrix(0,nrow = nrow(A.22)+nrow(A.33), ncol = ncol(A.11)), A.41, A.51,A.61)
     A.col.2 <- rbind(matrix(0,nrow = nrow(A.11),ncol = ncol(A.22)),A.22, matrix(0,nrow = nrow(A.33),ncol = ncol(A.22)), A.42, A.52, rep(0, ncol(A.22)))
     A.col.3 <- rbind(matrix(0,nrow = nrow(A.22)+nrow(A.11), ncol = ncol(A.33)), A.33, A.43, rep(0, ncol(A.33)), A.63)
@@ -617,7 +605,6 @@ ATEN <- function(y, z, X, DR=FALSE, X.out=NA){
     
     VAR <- t(c) %*% sigma %*% c /n
     se <- as.numeric(sqrt(VAR))
-    
   }
   
   # check balance (expected to be zero)
@@ -708,7 +695,7 @@ ATM <- function(y, z, X, DR=FALSE, X.out=NA){
     VAR <- t(c) %*% sigma %*% c /n
     se <- as.numeric(sqrt(VAR))
     
-  }else{ 
+  } else { 
     
     # Doubly robust estimation
     W <- cbind(1,X.out)
@@ -740,7 +727,6 @@ ATM <- function(y, z, X, DR=FALSE, X.out=NA){
     A.63 <- apply((1-z)*g.h/(1-e.h)*W, 2, mean) # 1 by w vector
     A.66 <- mean((1-z)*g.h/(1-e.h)) # scalar
     
-    
     A.col.1 <- rbind(A.11, matrix(0,nrow = nrow(A.22)+nrow(A.33), ncol = ncol(A.11)), A.41, A.51,A.61)
     A.col.2 <- rbind(matrix(0,nrow = nrow(A.11),ncol = ncol(A.22)),A.22, matrix(0,nrow = nrow(A.33),ncol = ncol(A.22)), A.42, A.52, rep(0, ncol(A.22)))
     A.col.3 <- rbind(matrix(0,nrow = nrow(A.22)+nrow(A.11), ncol = ncol(A.33)), A.33, A.43, rep(0, ncol(A.33)), A.63)
@@ -761,7 +747,6 @@ ATM <- function(y, z, X, DR=FALSE, X.out=NA){
     
     VAR <- t(c) %*% sigma %*% c /n
     se <- as.numeric(sqrt(VAR))
-    
   }
   
   # check balance (expected to be zero)
