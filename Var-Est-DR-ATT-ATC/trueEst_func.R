@@ -3,12 +3,11 @@
 ### ~~~~~~~~~~~~~~~~~~~~ Simulation Study          ~~~~~~~~~~~~~~~~~~~~ ###
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 
-### ~~~~ Coding TRUE estimations for ATE, ATT, ATC
+### Truth for ATE, ATT, ATC
 
 ### by Yi Liu
 ### Create date: Oct 09, 2021
 
-# We use the following function to estimate the true heterogeneous effect based on tilting function
 Heter_eff <- function(data) {
   
   ps.mult <- Z ~ X1 + X2 + X3 + X4 + X5 + X6 + X7
@@ -25,4 +24,3 @@ Heter_eff <- function(data) {
 }
 
 # For constant effect, based on our model, we use 4 for all cases
-

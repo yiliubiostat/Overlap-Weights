@@ -16,15 +16,10 @@ source("wild_boot_func.R")
 
 library(dplyr)
 
-# Analysis
-# data frame for recording results
-# in this format, we do data analysis easier
-
 weight.data.reps <- weight.data.reps3 %>% mutate(H = X1*X3)
 M <- length(unique(weight.data.reps$Ite))
 N <- nrow(weight.data.reps)/length(unique(weight.data.reps$Ite))
 weight.data.reps <- weight.data.reps %>% select(-Ite,-ZZ) %>% mutate(Ite = rep(1:M, rep(N,M)))
-
 
 results <- data.frame(ATE.wbvar = rep(NA, M),
                       ATE = rep(NA, M),
@@ -58,7 +53,6 @@ results <- data.frame(ATE.wbvar = rep(NA, M),
                       ATT.biasC.lwr = rep(NA, M),
                       ATT.biasC.upr = rep(NA, M),
                       ATT.biasC.ifci = rep(NA, M) )
-
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ~~~~~~~~~~~~~~~~~~~~~~ Augmented Estimators ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -223,10 +217,7 @@ for(i in 1:M) {
   sim.exp.h.cc$ATT.biasC.lwr[i] <- Lower.bc
   sim.exp.h.cc$ATT.biasC.upr[i] <- Upper.bc
   sim.exp.h.cc$ATT.biasC.ifci[i] <- ifelse((4 < Upper.bc & 4 > Lower.bc), 1, 0)
-  
 }
-
-
 
 # Case 2: PS correct but outcome misspecified
 sim.rad.h.cm <- results
@@ -387,10 +378,7 @@ for(i in 1:M) {
   sim.exp.h.cm$ATT.biasC.lwr[i] <- Lower.bc
   sim.exp.h.cm$ATT.biasC.upr[i] <- Upper.bc
   sim.exp.h.cm$ATT.biasC.ifci[i] <- ifelse((4 < Upper.bc & 4 > Lower.bc), 1, 0)
-  
 }
-
-
 
 # Case 3: PS misspecified but outcome correct
 sim.rad.h.mc <- results
@@ -551,9 +539,7 @@ for(i in 1:M) {
   sim.exp.h.mc$ATT.biasC.lwr[i] <- Lower.bc
   sim.exp.h.mc$ATT.biasC.upr[i] <- Upper.bc
   sim.exp.h.mc$ATT.biasC.ifci[i] <- ifelse((4 < Upper.bc & 4 > Lower.bc), 1, 0)
-  
 }
-
 
 # Case 4: Both PS and outcome are misspecified
 sim.rad.h.mm <- results
@@ -714,11 +700,9 @@ for(i in 1:M) {
   sim.exp.h.mm$ATT.biasC.lwr[i] <- Lower.bc
   sim.exp.h.mm$ATT.biasC.upr[i] <- Upper.bc
   sim.exp.h.mm$ATT.biasC.ifci[i] <- ifelse((4 < Upper.bc & 4 > Lower.bc), 1, 0)
-  
 }
 
 # Summarize results
-
 wb3.rad.c.cc <- sim.rad.h.cc
 wb3.rad.c.cm <- sim.rad.h.cm
 wb3.rad.c.mc <- sim.rad.h.mc
@@ -733,5 +717,3 @@ wb3.exp.c.mm <- sim.exp.h.mm
 save(file = "md3_sims_WBoot_cons.RData", 
      wb3.rad.c.cc, wb3.rad.c.cm, wb3.rad.c.mc, wb3.rad.c.mm, 
      wb3.exp.c.cc, wb3.exp.c.cm, wb3.exp.c.mc, wb3.exp.c.mm )
-
-

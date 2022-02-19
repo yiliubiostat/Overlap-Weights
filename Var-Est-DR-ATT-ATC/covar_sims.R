@@ -3,17 +3,15 @@
 ### ~~~~~~~~~~~~~~~~~~~~ Simulation Study          ~~~~~~~~~~~~~~~~~~~~ ###
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 
-### ~~~~ Generating simulation dataset
+### Data generating process (DGP): covariates in iterated simulations
 
-### ~~~~ by Yi Liu
-### ~~~~ Create date: Sept 11, 2021
+### by Yi Liu
+### Create date: Sept 11, 2021
 
-# This is for simulation with multiple replicates
-# --- Sample size
-# --- 500/1000/2000
+# Sample size of each iteration
 N <- 1000
 
-# --- Desired No. of replicates: 2000
+# No. of replicates: desired 2000
 M0 <- 2000
 M <- round(1.5*M0)
 
@@ -32,8 +30,6 @@ covar <- data.frame(
   X6 = rep(0, M*N),
   X7 = rep(0, M*N)  )
 
-# Inputting values to the data frame, for correct models
-
 for(i in 1:M) {
   
   covar$X4[(1+N*(i-1)):(N*i)] = rbinom(n = N, size = 1, prob = 0.5)
@@ -51,7 +47,6 @@ for(i in 1:M) {
   for(k in 1:N) {
     BN[k,] = mvrnorm(n = 1, mu = mu[k,], Sigma = X3[k]*A1 + (1-X3[k])*A2)
   }
-  
   covar$X1[(1+N*(i-1)):(N*i)] <- BN$X1
   covar$X2[(1+N*(i-1)):(N*i)] <- BN$X2
   
@@ -63,5 +58,3 @@ for(i in 1:M) {
 }
 
 save(file = "covar_sims.RData", covar)
-
-

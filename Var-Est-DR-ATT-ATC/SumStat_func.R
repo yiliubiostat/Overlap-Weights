@@ -6,7 +6,7 @@
 ####### Summary statistics functions
 
 ### by Yi Liu
-### Create date: Nov 7, 2021
+### Nov 7, 2021
 
 library(dplyr)
 
@@ -30,7 +30,6 @@ bias.med <- function(truth, data) {
   100*apply(data/truth-1, 2, median) %>% abs()
 }
 
-
 RMSE <- function(truth, data) {
   sqmean <- function(n) sqrt(mean(n))
   cols <- c("ATC", "ATT")
@@ -38,7 +37,6 @@ RMSE <- function(truth, data) {
   truth <- matrix(rep(as.matrix(truth[, cols]), nrow(data)), nrow=2) %>% t()
   apply((data-truth)^2, 2, sqmean)
 }
-
 
 RE <- function(data) {
   cols <- c("ATC", "ATT")
@@ -49,7 +47,6 @@ RE <- function(data) {
   emp/apply(var, 2, mean)
 }
 
-
 RE.med <- function(data) {
   cols <- c("ATC", "ATT")
   PE <- data[, cols] %>% as.matrix()
@@ -58,7 +55,6 @@ RE.med <- function(data) {
   emp <- apply(PE, 2, var)
   emp/apply(var, 2, median)
 }
-
 
 CP <- function(truth, data) {
   cols <- c("ATC.ifci", "ATT.ifci")

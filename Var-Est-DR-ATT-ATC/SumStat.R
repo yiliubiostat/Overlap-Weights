@@ -6,7 +6,7 @@
 ####### Summary statistics (Tables for paper)
 
 ### by Yi Liu
-### Create date: Nov 20, 2021
+### Nov 20, 2021
 
 library(xtable)
 source("SumStat_func.R")
@@ -82,7 +82,6 @@ table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                     CP = c(CP(md1.true_eff, sim.aug.new.cc),
                            CP(md1.true_eff, wb1.rad.h.cc), 
                            CP(md1.true_eff, wb1.exp.h.cc)))
-
 print(xtable(table), include.rownames=FALSE)
 
 table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
@@ -270,7 +269,6 @@ table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                     CP = c(CP(md2.true_eff, sim.aug.new.cc),
                            CP(md2.true_eff, wb2.rad.h.cc), 
                            CP(md2.true_eff, wb2.exp.h.cc)))
-
 print(xtable(table), include.rownames=FALSE)
 
 table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
@@ -569,7 +567,6 @@ table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                            CP(truth.c, wb3.rad.c.mm), 
                            CP(truth.c, wb3.exp.c.mm)))
 print(xtable(table), include.rownames=FALSE)
-
 
 table <- data.frame(Est. = rep(c("ATC", "ATT"), 3),
                     #Truth = rep(as.numeric(md3.true_eff[, c("ATC", "ATT")]), 3),

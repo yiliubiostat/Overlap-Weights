@@ -3,11 +3,10 @@
 ### ~~~~~~~~~~~~~~~~~~~~ Simulation Study          ~~~~~~~~~~~~~~~~~~~~ ###
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 
-### ~~~~ Correct PS and OR models, truth of estimands
+### Data generating process (DGP)
 
 ### by Yi Liu
-### Create date: Oct 24, 2021
-
+### Oct 24, 2021
 
 # Model data for simulation
 source("ps_out_md_func.R")
@@ -24,10 +23,8 @@ md3.simdat <- PS.model.reps(alpha0 = 0.98, alpha1)
 
 save(file = "model_data_sim.Rdata", md1.simdat, md2.simdat, md3.simdat)
 
-
 # Truth of estimands
 ### Constant effect: tau = 4 for all tilting functions
-
 ### Heterogeneous effect:
 # --- Choose a large N to simulate true population
 N_true <- 1000000
@@ -59,7 +56,6 @@ X7 <- (BN$X2)^2
 
 covar_true <- data.frame(X1 = BN$X1, X2 = BN$X2,
                          X3 = X3, X4 = X4, X5 = X5, X6 = X6, X7 = X7)
-
 rm(BN, A1, A2)
 
 # load("covar_true.RData")
@@ -92,13 +88,10 @@ treatment <- function(prop, alpha, Covar = covar_true){
     # Update the value of alpha0
     alpha0 = alpha0 + 0.01
   }
-  
   PS.data <- cbind(Covar, Z)
-  
   return(list(PS.data, alpha0))
   rm(logit, e)
 }
-
 
 # Generate PS and outcome models
 # --- For correctly specified models
@@ -120,7 +113,6 @@ PS.model <- function(prop = NA, alpha, alpha0 = NA, Covar = covar_true) {
     Z <- rbinom(n = nrow(Covar), size = 1, prob = e)
     PS.data <- cbind(Covar, Z)
   }
-  
   return(PS.data)
 }
 

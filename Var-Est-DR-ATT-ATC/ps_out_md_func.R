@@ -3,12 +3,11 @@
 ### ~~~~~~~~~~~~~~~~~~~~ Simulation Study          ~~~~~~~~~~~~~~~~~~~~ ###
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 
-### ~~~~ Generating PS and Outcome models
+### Data generating process (DGP): PS and OR models
 
 ### by Yi Liu
-### Create date: Oct 24, 2021
+### Oct 24, 2021
 
-# getwd()
 load("covar_sims.RData")
 
 M = max(covar$Ite)
@@ -70,9 +69,7 @@ PS.model.reps <- function(alpha0, alpha1) {
       (PS.data[(1+N*(i-1)):(N*i), "X1"] + PS.data[(1+N*(i-1)):(N*i), "X2"])^2 + 
       (4 + 3*(PS.data[(1+N*(i-1)):(N*i), "X1"] + PS.data[(1+N*(i-1)):(N*i), "X2"])^2 + PS.data[(1+N*(i-1)):(N*i), "X1"]*PS.data[(1+N*(i-1)):(N*i), "X3"])*PS.data[(1+N*(i-1)):(N*i), "Z"] + 
       epsilon
-  
   }
   PSweight.data.reps <- cbind(PS.data, Y.c, Y.h)
   return(PSweight.data.reps)
 }
-

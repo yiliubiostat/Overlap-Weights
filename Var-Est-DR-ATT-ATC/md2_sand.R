@@ -6,7 +6,7 @@
 ####### Sandwich variance (new), Model 2
 
 ### Created by Yi Liu, modified by Yunji Zhou
-### Create date: Oct 9, 2021
+### Oct 9, 2021
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ~~~~~~~~~~~~~~~~~~~~~~ Using M Replicates for Estimands ~~~~~~~~~~~~~~~~~
@@ -14,7 +14,6 @@
 
 library(dplyr)
 library(PSweight)
-
 source("newSand_func.R")
 
 load("md2_sims_PSwt.RData")
@@ -24,12 +23,6 @@ rm(sim2.aug.c.cc,sim2.aug.c.cm,sim2.aug.c.mc,sim2.aug.c.mm,
 
 iteration <- unique(weight.data.reps$Ite)
 M <- 2000
-
-# ------------------------------------------------------------------------------------------
-
-# Analysis
-# data frame for recording results
-# in this format, we do data analysis easier
 
 results.new <- data.frame(IPW.new = rep(NA, M),
                         IPW.new.var = rep(NA, M),
@@ -51,7 +44,6 @@ results.new <- data.frame(IPW.new = rep(NA, M),
                         
                         Row.Num = 1:M)
 
-
 results.old <- data.frame(IPW.old = rep(NA, M),
                         IPW.old.var = rep(NA, M),
                         IPW.old.lwr = rep(NA, M),
@@ -71,15 +63,12 @@ results.old <- data.frame(IPW.old = rep(NA, M),
                         ATT.old.ifci = rep(NA, M),
                         
                         Row.Num = 1:M)
-
 PE.c <- 4
 PE.h <- md2.true.h
-
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ~~~~~~~~~~~~~~~~~~~~~~ Augmented Estimators ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 
 # Case 1: Both PS and outcome are correct
 sim.aug.new.cc <- results.new
@@ -189,8 +178,6 @@ for(i in 1:M) {
   sim.aug.old.cc$ATT.old.upr[i] <- Upper
   sim.aug.old.cc$ATT.old.ifci[i] <- ifelse(is.na(Var), NA, ifelse((PE.h$True.ATT.h < Upper & PE.h$True.ATT.h > Lower), 1, 0))
   
-  
-  
   # Homogeneous trt effect
   # Estimation using new sandwich estimator 
   # --- ATE: IPW without trimming
@@ -278,10 +265,7 @@ for(i in 1:M) {
   c.sim.aug.old.cc$ATT.old.lwr[i] <- Lower
   c.sim.aug.old.cc$ATT.old.upr[i] <- Upper
   c.sim.aug.old.cc$ATT.old.ifci[i] <- ifelse(is.na(Var), NA, ifelse((PE.c < Upper & PE.c > Lower), 1, 0))
-  
 }
-
-
 
 # Case 2: PS correct but outcome misspecified
 sim.aug.new.cm <- results.new
@@ -390,9 +374,7 @@ for(i in 1:M) {
   sim.aug.old.cm$ATT.old.lwr[i] <- Lower
   sim.aug.old.cm$ATT.old.upr[i] <- Upper
   sim.aug.old.cm$ATT.old.ifci[i] <- ifelse(is.na(Var), NA, ifelse((PE.h$True.ATT.h < Upper & PE.h$True.ATT.h > Lower), 1, 0))
-  
-  
-  
+
   # Homogeneous trt effect
   # Estimation using new sandwich estimator 
   # --- ATE: IPW without trimming
@@ -467,7 +449,6 @@ for(i in 1:M) {
   c.sim.aug.old.cm$ATC.old.upr[i] <- Upper
   c.sim.aug.old.cm$ATC.old.ifci[i] <- ifelse(is.na(Var), NA, ifelse((PE.c < Upper & PE.c > Lower), 1, 0))
   
-  
   # --- ATT
   result <- summary(PSweight(ps.formula = ps.mult, yname = "Y.c", weight = "treated", data = data,
                              augmentation = TRUE, out.formula = out.form.c, family = "gaussian"), type = "DIF")
@@ -481,7 +462,6 @@ for(i in 1:M) {
   c.sim.aug.old.cm$ATT.old.lwr[i] <- Lower
   c.sim.aug.old.cm$ATT.old.upr[i] <- Upper
   c.sim.aug.old.cm$ATT.old.ifci[i] <- ifelse(is.na(Var), NA, ifelse((PE.c < Upper & PE.c > Lower), 1, 0))
-  
 }
 
 # Case 3: PS misspecified but outcome correct
@@ -593,8 +573,6 @@ for(i in 1:M) {
   sim.aug.old.mc$ATT.old.upr[i] <- Upper
   sim.aug.old.mc$ATT.old.ifci[i] <- ifelse(is.na(Var), NA, ifelse((PE.h$True.ATT.h < Upper & PE.h$True.ATT.h > Lower), 1, 0))
   
-  
-  
   # Homogeneous trt effect
   # Estimation using new sandwich estimator 
   # --- ATE: IPW without trimming
@@ -669,7 +647,6 @@ for(i in 1:M) {
   c.sim.aug.old.mc$ATC.old.upr[i] <- Upper
   c.sim.aug.old.mc$ATC.old.ifci[i] <- ifelse(is.na(Var), NA, ifelse((PE.c < Upper & PE.c > Lower), 1, 0))
   
-  
   # --- ATT
   result <- summary(PSweight(ps.formula = ps.mult, yname = "Y.c", weight = "treated", data = data,
                              augmentation = TRUE, out.formula = out.form.c, family = "gaussian"), type = "DIF")
@@ -683,7 +660,6 @@ for(i in 1:M) {
   c.sim.aug.old.mc$ATT.old.lwr[i] <- Lower
   c.sim.aug.old.mc$ATT.old.upr[i] <- Upper
   c.sim.aug.old.mc$ATT.old.ifci[i] <- ifelse(is.na(Var), NA, ifelse((PE.c < Upper & PE.c > Lower), 1, 0))
-  
 }
 
 # Case 4: Both PS and outcome are misspecified
@@ -698,7 +674,6 @@ ps.mult <- Z ~ X1 + X2 + X3 + X4
 atc.mult <- ZZ ~ X1 + X2 + X3 + X4
 out.form.c <- Y.c ~ X1 + X2 + X3 + X4 
 out.form.h <- Y.h ~ X1 + X2 + X3 + X4 + I(X1*X3)
-
 
 for(i in 1:M) {
   
@@ -723,7 +698,6 @@ for(i in 1:M) {
   sim.aug.new.mm$IPW.new.upr[i] <- Upper
   sim.aug.new.mm$IPW.new.ifci[i] <- ifelse(is.na(Var), NA, ifelse((PE.h$True.IPW.h < Upper & PE.h$True.IPW.h > Lower), 1, 0))
   
-
   # --- ATC
   result <- ATC(y=data$Y.h, z=data$Z, X=ps.cov, DR=TRUE, X.out = out.cov) 
   
@@ -782,7 +756,6 @@ for(i in 1:M) {
   sim.aug.old.mm$ATC.old.upr[i] <- Upper
   sim.aug.old.mm$ATC.old.ifci[i] <- ifelse(is.na(Var), NA, ifelse((PE.h$True.ATC.h < Upper & PE.h$True.ATC.h > Lower), 1, 0))
   
-  
   # --- ATT
   result <- summary(PSweight(ps.formula = ps.mult, yname = "Y.h", weight = "treated", data = data,
                              augmentation = TRUE, out.formula = out.form.h, family = "gaussian"), type = "DIF")
@@ -796,8 +769,6 @@ for(i in 1:M) {
   sim.aug.old.mm$ATT.old.lwr[i] <- Lower
   sim.aug.old.mm$ATT.old.upr[i] <- Upper
   sim.aug.old.mm$ATT.old.ifci[i] <- ifelse(is.na(Var), NA, ifelse((PE.h$True.ATT.h < Upper & PE.h$True.ATT.h > Lower), 1, 0))
-  
-  
   
   # Homogeneous trt effect
   # Estimation using new sandwich estimator 
@@ -814,7 +785,6 @@ for(i in 1:M) {
   c.sim.aug.new.mm$IPW.new.lwr[i] <- Lower
   c.sim.aug.new.mm$IPW.new.upr[i] <- Upper
   c.sim.aug.new.mm$IPW.new.ifci[i] <- ifelse(is.na(Var), NA, ifelse((PE.c < Upper & PE.c > Lower), 1, 0))
-  
   
   # --- ATC
   result <- ATC(y=data$Y.c, z=data$Z, X=ps.cov, DR=TRUE, X.out = out.cov) 
@@ -874,7 +844,6 @@ for(i in 1:M) {
   c.sim.aug.old.mm$ATC.old.upr[i] <- Upper
   c.sim.aug.old.mm$ATC.old.ifci[i] <- ifelse(is.na(Var), NA, ifelse((PE.c < Upper & PE.c > Lower), 1, 0))
   
-  
   # --- ATT
   result <- summary(PSweight(ps.formula = ps.mult, yname = "Y.c", weight = "treated", data = data,
                              augmentation = TRUE, out.formula = out.form.c, family = "gaussian"), type = "DIF")
@@ -888,7 +857,6 @@ for(i in 1:M) {
   c.sim.aug.old.mm$ATT.old.lwr[i] <- Lower
   c.sim.aug.old.mm$ATT.old.upr[i] <- Upper
   c.sim.aug.old.mm$ATT.old.ifci[i] <- ifelse(is.na(Var), NA, ifelse((PE.c < Upper & PE.c > Lower), 1, 0))
-  
 }
 
 # Save data

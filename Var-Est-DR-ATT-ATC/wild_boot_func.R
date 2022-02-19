@@ -3,7 +3,7 @@
 ### ~~~~~~~~~~~~~~~~~~~~ Simulation Study          ~~~~~~~~~~~~~~~~~~~~ ###
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 
-### Wild bootstrap variance estimations for DR ATT ATC
+### Wild bootstrap variance estimations for DR ATE ATT and ATC
 
 ### by Yi Liu
 ### Nov 16, 2021
@@ -55,7 +55,7 @@ ATE.boot <- function(y, z, X, X.out=NA, R=1000, RV = "Rad"){
     # compute the estimate of Delta
     Delta.h <- c(Delta.h, 
                  sum(ksi*(z/e.h*(y-m1.h)-(1-z)/(1-e.h)*(y-m0.h)+m0.h-m1.h-tau)/sqrt(n)))
-  } 
+  }
   z.up <- qnorm(0.75, mean=0, sd=1)
   z.lw <- qnorm(0.25, mean=0, sd=1)
   
@@ -84,7 +84,7 @@ ATE.boot <- function(y, z, X, X.out=NA, R=1000, RV = "Rad"){
               biasC.Est = biasC.Est, biasC.lwr = biasC.lwr, biasC.upr = biasC.upr))
 }
 
-### Inverse probability weights for the treated
+### Inverse probability weights on the treated
 ATT.boot <- function(y, z, X, X.out=NA, R=1000, RV = "Rad"){
   
   # summary statistics
@@ -126,7 +126,7 @@ ATT.boot <- function(y, z, X, X.out=NA, R=1000, RV = "Rad"){
     # compute the estimate of Delta
     p <- n1/n
     Delta.h <- c(Delta.h, sum(ksi*(1/p*((z-e.h)/(1-e.h)*(y-m0.h)-z*tau)))/sqrt(n) )
-  }  
+  }
   z.up <- qnorm(0.75, mean=0, sd=1)
   z.lw <- qnorm(0.25, mean=0, sd=1)
   
@@ -155,7 +155,7 @@ ATT.boot <- function(y, z, X, X.out=NA, R=1000, RV = "Rad"){
               biasC.Est = biasC.Est, biasC.lwr = biasC.lwr, biasC.upr = biasC.upr))
 }
 
-### Inverse probability weights for the control
+### Inverse probability weights on the controls
 ATC.boot <- function(y, z, X, X.out=NA, R=1000, RV = "Rad"){
   
   # summary statistics
@@ -230,8 +230,8 @@ ATC.boot <- function(y, z, X, X.out=NA, R=1000, RV = "Rad"){
 # Illustrative calculations
 ###########################################################
 # simulate a data set with six potential confounders
-library(mvtnorm)
 
+library(mvtnorm)
 n <- 1000
 set.seed(123)
 X <- rmvnorm(n, rep(0,6), diag(6))
@@ -248,9 +248,12 @@ mu.y <- c(V%*%c(1,rep(0.5,3),rep(-0.5,3))) + z*delta
 y <- rnorm(n, mu.y, sd = 2)
 dat <- as.data.frame( cbind(X,z,y))
 
+# use the function for ATE
 ATE.RM <- ATE.boot(y=y, z=z, X=X, X.out = X)
 ATE.RM
+# use the function for ATT
 ATT.RM <- ATT.boot(y=y, z=z, X=X, X.out = X, R=1000)
 ATT.RM
+# use the function for ATC
 ATC.RM <- ATC.boot(y=y, z=z, X=X, X.out = X)
 ATC.RM

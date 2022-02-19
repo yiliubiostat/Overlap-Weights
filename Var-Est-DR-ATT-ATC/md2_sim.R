@@ -4,7 +4,7 @@
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 
 ### by Yi Liu
-### Create date: Oct 24, 2021
+### Oct 24, 2021
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ~~~~~~~~~~~~~~~~~~~~~~ Using M Replicates for Estimands ~~~~~~~~~~~~~~~~~
@@ -15,10 +15,6 @@ load("truth.Rdata")
 
 weight.data.reps <- md2.simdat
 M <- length(unique(weight.data.reps$Ite))
-
-# Analysis
-# data frame for recording results
-# in this format, we do data analysis easier
 
 results.c <- data.frame(IPW.c = rep(NA, M),
                         IPW.c.var = rep(NA, M),
@@ -40,7 +36,6 @@ results.c <- data.frame(IPW.c = rep(NA, M),
                         
                         Row.Num = 1:M)
 
-
 results.h <- data.frame(IPW.h = rep(NA, M),
                         IPW.h.var = rep(NA, M),
                         IPW.h.lwr = rep(NA, M),
@@ -61,12 +56,9 @@ results.h <- data.frame(IPW.h = rep(NA, M),
                         
                         Row.Num = 1:M)
 
-
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ~~~~~~~~~~~~~~~~~~~~~~ Augmented Estimators ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
 # Case 1: Both PS and outcome are correct
 PE.c <- 4
 PE.h <- md2.true_eff
@@ -127,7 +119,6 @@ for(i in 1:M) {
   sim.aug.c.cc$ATT.c.ifci[i] <- ifelse(is.na(Var), NA, ifelse((PE.c < Upper & PE.c > Lower), 1, 0))
   
   # Hetergeneous model
-  
   # --- ATE: IPW without trimming
   result <- summary(PSweight(ps.formula = ps.mult, yname = "Y.h", weight = "IPW", data = data,
                              augmentation = TRUE, out.formula = out.form.h, family = "gaussian"), type = "DIF")
@@ -156,7 +147,6 @@ for(i in 1:M) {
   sim.aug.h.cc$ATC.h.upr[i] <- Upper
   sim.aug.h.cc$ATC.h.ifci[i] <- ifelse(is.na(Var), NA, ifelse((PE.h$True.ATC.h < Upper & PE.h$True.ATC.h > Lower), 1, 0))
   
-  
   # --- ATT
   result <- summary(PSweight(ps.formula = ps.mult, yname = "Y.h", weight = "treated", data = data,
                              augmentation = TRUE, out.formula = out.form.h, family = "gaussian"), type = "DIF")
@@ -170,11 +160,7 @@ for(i in 1:M) {
   sim.aug.h.cc$ATT.h.lwr[i] <- Lower
   sim.aug.h.cc$ATT.h.upr[i] <- Upper
   sim.aug.h.cc$ATT.h.ifci[i] <- ifelse(is.na(Var), NA, ifelse((PE.h$True.ATT.h < Upper & PE.h$True.ATT.h > Lower), 1, 0))
-  
-  
 }
-
-
 
 # Case 2: PS correct but outcome misspecified
 sim.aug.c.cm <- results.c
@@ -233,7 +219,6 @@ for(i in 1:M) {
   sim.aug.c.cm$ATT.c.ifci[i] <- ifelse(is.na(Var), NA, ifelse((PE.c < Upper & PE.c > Lower), 1, 0))
   
   # Hetergeneous model
-  
   # --- ATE: IPW without trimming
   result <- summary(PSweight(ps.formula = ps.mult, yname = "Y.h", weight = "IPW", data = data,
                              augmentation = TRUE, out.formula = out.form.h, family = "gaussian"), type = "DIF")
@@ -247,7 +232,6 @@ for(i in 1:M) {
   sim.aug.h.cm$IPW.h.lwr[i] <- Lower
   sim.aug.h.cm$IPW.h.upr[i] <- Upper
   sim.aug.h.cm$IPW.h.ifci[i] <- ifelse(is.na(Var), NA, ifelse((PE.h$True.IPW.h < Upper & PE.h$True.IPW.h > Lower), 1, 0))
-  
   
   # --- ATC
   result <- summary(PSweight(ps.formula = atc.mult, yname = "Y.h", weight = "treated", data = data,
@@ -263,7 +247,6 @@ for(i in 1:M) {
   sim.aug.h.cm$ATC.h.upr[i] <- Upper
   sim.aug.h.cm$ATC.h.ifci[i] <- ifelse(is.na(Var), NA, ifelse((PE.h$True.ATC.h < Upper & PE.h$True.ATC.h > Lower), 1, 0))
   
-  
   # --- ATT
   result <- summary(PSweight(ps.formula = ps.mult, yname = "Y.h", weight = "treated", data = data,
                              augmentation = TRUE, out.formula = out.form.h, family = "gaussian"), type = "DIF")
@@ -277,8 +260,6 @@ for(i in 1:M) {
   sim.aug.h.cm$ATT.h.lwr[i] <- Lower
   sim.aug.h.cm$ATT.h.upr[i] <- Upper
   sim.aug.h.cm$ATT.h.ifci[i] <- ifelse(is.na(Var), NA, ifelse((PE.h$True.ATT.h < Upper & PE.h$True.ATT.h > Lower), 1, 0))
-  
-  
 }
 
 # Case 3: PS misspecified but outcome correct
@@ -338,7 +319,6 @@ for(i in 1:M) {
   sim.aug.c.mc$ATT.c.ifci[i] <- ifelse(is.na(Var), NA, ifelse((PE.c < Upper & PE.c > Lower), 1, 0))
   
   # Hetergeneous model
-  
   # --- ATE: IPW without trimming
   result <- summary(PSweight(ps.formula = ps.mult, yname = "Y.h", weight = "IPW", data = data,
                              augmentation = TRUE, out.formula = out.form.h, family = "gaussian"), type = "DIF")
@@ -367,7 +347,6 @@ for(i in 1:M) {
   sim.aug.h.mc$ATC.h.upr[i] <- Upper
   sim.aug.h.mc$ATC.h.ifci[i] <- ifelse(is.na(Var), NA, ifelse((PE.h$True.ATC.h < Upper & PE.h$True.ATC.h > Lower), 1, 0))
   
-  
   # --- ATT
   result <- summary(PSweight(ps.formula = ps.mult, yname = "Y.h", weight = "treated", data = data,
                              augmentation = TRUE, out.formula = out.form.h, family = "gaussian"), type = "DIF")
@@ -381,8 +360,6 @@ for(i in 1:M) {
   sim.aug.h.mc$ATT.h.lwr[i] <- Lower
   sim.aug.h.mc$ATT.h.upr[i] <- Upper
   sim.aug.h.mc$ATT.h.ifci[i] <- ifelse(is.na(Var), NA, ifelse((PE.h$True.ATT.h < Upper & PE.h$True.ATT.h > Lower), 1, 0))
-  
-  
 }
 
 # Case 4: Both PS and outcome are misspecified
@@ -393,7 +370,6 @@ ps.mult <- Z ~ X1 + X2 + X3 + X4
 atc.mult <- ZZ ~ X1 + X2 + X3 + X4
 out.form.c <- Y.c ~ X1 + X2 + X3 + X4 
 out.form.h <- Y.h ~ X1 + X2 + X3 + X4 + I(X1*X3)
-
 
 for(i in 1:M) {
   
@@ -443,7 +419,6 @@ for(i in 1:M) {
   sim.aug.c.mm$ATT.c.ifci[i] <- ifelse(is.na(Var), NA, ifelse((PE.c < Upper & PE.c > Lower), 1, 0))
   
   # Hetergeneous model
-  
   # --- ATE: IPW without trimming
   result <- summary(PSweight(ps.formula = ps.mult, yname = "Y.h", weight = "IPW", data = data,
                              augmentation = TRUE, out.formula = out.form.h, family = "gaussian"), type = "DIF")
@@ -472,7 +447,6 @@ for(i in 1:M) {
   sim.aug.h.mm$ATC.h.upr[i] <- Upper
   sim.aug.h.mm$ATC.h.ifci[i] <- ifelse(is.na(Var), NA, ifelse((PE.h$True.ATC.h < Upper & PE.h$True.ATC.h > Lower), 1, 0))
   
-  
   # --- ATT
   result <- summary(PSweight(ps.formula = ps.mult, yname = "Y.h", weight = "treated", data = data,
                              augmentation = TRUE, out.formula = out.form.h, family = "gaussian"), type = "DIF")
@@ -486,9 +460,7 @@ for(i in 1:M) {
   sim.aug.h.mm$ATT.h.lwr[i] <- Lower
   sim.aug.h.mm$ATT.h.upr[i] <- Upper
   sim.aug.h.mm$ATT.h.ifci[i] <- ifelse(is.na(Var), NA, ifelse((PE.h$True.ATT.h < Upper & PE.h$True.ATT.h > Lower), 1, 0))
-  
 }
-
 
 # One way to address NA problem in variance and CIs
 num.na <- function(x) { sum(is.na(x)) }
@@ -521,7 +493,6 @@ sim2.aug.h.mc <- sim.aug.h.mc %>% filter(Row.Num %in% R)
 
 sim2.aug.c.mm <- sim.aug.c.mm %>% filter(Row.Num %in% R)
 sim2.aug.h.mm <- sim.aug.h.mm %>% filter(Row.Num %in% R)
-
 
 # Design module
 weight.data.reps2 <- weight.data.reps %>% filter(Ite %in% R)
@@ -559,5 +530,3 @@ save(file = "md2_sims_PSwt.RData",
      weight.data.reps2, sim2.p, sim2.ratio, md2.true.h,
      sim2.aug.c.cc, sim2.aug.h.cc, sim2.aug.c.cm, sim2.aug.h.cm, 
      sim2.aug.c.mc, sim2.aug.h.mc, sim2.aug.c.mm, sim2.aug.h.mm )
-
-
