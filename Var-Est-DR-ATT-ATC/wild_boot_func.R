@@ -3,10 +3,10 @@
 ### ~~~~~~~~~~~~~~~~~~~~ Simulation Study          ~~~~~~~~~~~~~~~~~~~~ ###
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 
-### ~~~~ Wild bootstrap variance estimations for DR ATT ATC
+### Wild bootstrap variance estimations for DR ATT ATC
 
 ### by Yi Liu
-### Create date: Nov 16, 2021
+### Nov 16, 2021
 
 ### Inverse probability weights
 ATE.boot <- function(y, z, X, X.out=NA, R=1000, RV = "Rad"){
@@ -55,8 +55,7 @@ ATE.boot <- function(y, z, X, X.out=NA, R=1000, RV = "Rad"){
     # compute the estimate of Delta
     Delta.h <- c(Delta.h, 
                  sum(ksi*(z/e.h*(y-m1.h)-(1-z)/(1-e.h)*(y-m0.h)+m0.h-m1.h-tau)/sqrt(n)))
-  }
-  
+  } 
   z.up <- qnorm(0.75, mean=0, sd=1)
   z.lw <- qnorm(0.25, mean=0, sd=1)
   
@@ -127,8 +126,7 @@ ATT.boot <- function(y, z, X, X.out=NA, R=1000, RV = "Rad"){
     # compute the estimate of Delta
     p <- n1/n
     Delta.h <- c(Delta.h, sum(ksi*(1/p*((z-e.h)/(1-e.h)*(y-m0.h)-z*tau)))/sqrt(n) )
-  }
-  
+  }  
   z.up <- qnorm(0.75, mean=0, sd=1)
   z.lw <- qnorm(0.25, mean=0, sd=1)
   
@@ -156,7 +154,6 @@ ATT.boot <- function(y, z, X, X.out=NA, R=1000, RV = "Rad"){
   return(list(PE = tau, Std.Boot = se.boot, PE.lwr = PE.lwr, PE.upr = PE.upr,
               biasC.Est = biasC.Est, biasC.lwr = biasC.lwr, biasC.upr = biasC.upr))
 }
-
 
 ### Inverse probability weights for the control
 ATC.boot <- function(y, z, X, X.out=NA, R=1000, RV = "Rad"){
@@ -201,7 +198,6 @@ ATC.boot <- function(y, z, X, X.out=NA, R=1000, RV = "Rad"){
     p <- n1/n
     Delta.h <- c(Delta.h, sum(ksi*(1/(1-p)*(z-e.h)/e.h*(y-m1.h)-(1-z)*tau)/sqrt(n)))
   }
-  
   z.up <- qnorm(0.75, mean=0, sd=1)
   z.lw <- qnorm(0.25, mean=0, sd=1)
   
@@ -230,14 +226,11 @@ ATC.boot <- function(y, z, X, X.out=NA, R=1000, RV = "Rad"){
               biasC.Est = biasC.Est, biasC.lwr = biasC.lwr, biasC.upr = biasC.upr))
 }
 
-
 ###########################################################
 # Illustrative calculations
 ###########################################################
 # simulate a data set with six potential confounders
 library(mvtnorm)
-library(PSW)
-library(PSweight)
 
 n <- 1000
 set.seed(123)
@@ -255,37 +248,9 @@ mu.y <- c(V%*%c(1,rep(0.5,3),rep(-0.5,3))) + z*delta
 y <- rnorm(n, mu.y, sd = 2)
 dat <- as.data.frame( cbind(X,z,y))
 
-
-
-# use the function for ATE
 ATE.RM <- ATE.boot(y=y, z=z, X=X, X.out = X)
 ATE.RM
-
-# PSweight for ATE
-# ATE.PSweight.bt <- PSweight(ps.formula = z ~ X1+X2+X3+X4+X5+X6, out.formula = y ~ X1+X2+X3+X4+X5+X6, zname = "z", yname = "y",
-#                          weight = "IPW", augmentation = T, data = dat, bootstrap = T, R=1000)
-# summary(ATE.PSweight.bt, type = "DIF")$estimates
-# 
-# ATE.PSweight <- PSweight(ps.formula = z ~ X1+X2+X3+X4+X5+X6, out.formula = y ~ X1+X2+X3+X4+X5+X6, zname = "z", yname = "y",
-#                             weight = "IPW", augmentation = T, data = dat)
-# summary(ATE.PSweight, type = "DIF")$estimates
-
-
-# use the function for ATT
 ATT.RM <- ATT.boot(y=y, z=z, X=X, X.out = X, R=1000)
 ATT.RM
-
-# PSweight for ATT
-# ATT.PSweight.bt <- PSweight(ps.formula = z ~ X1+X2+X3+X4+X5+X6, out.formula = y ~ X1+X2+X3+X4+X5+X6, zname = "z", yname = "y",
-#                          weight = "treated", augmentation = T, data = dat, bootstrap = T, R=1000)
-# summary(ATT.PSweight.bt, type = "DIF")$estimates
-# 
-# ATT.PSweight <- PSweight(ps.formula = z ~ X1+X2+X3+X4+X5+X6, out.formula = y ~ X1+X2+X3+X4+X5+X6, zname = "z", yname = "y",
-#                          weight = "treated", augmentation = T, data = dat)
-# summary(ATT.PSweight, type = "DIF")$estimates
-
-
-# use the function for ATC
 ATC.RM <- ATC.boot(y=y, z=z, X=X, X.out = X)
 ATC.RM
-
