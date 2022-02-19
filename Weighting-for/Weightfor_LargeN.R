@@ -3,13 +3,12 @@
 ### ~~~~~~~~~~~~~~~~~~~~ Simulation Study          ~~~~~~~~~~~~~~~~~~~~ ###
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 
-### ~~~~ Simulate a large population
+### Simulation by a large population
 
 ### by Yi Liu
 ### Sept 5, 2021
 
-# --- The purpose of this program is to calculate (heterogeneous) treatment effect truth
-# --- using the very large N as follows
+# The purpose of this program is to approach the truth of (heterogeneous) treatment effects using a large N
 N_true <- 1000000
 
 # Generate covariates
