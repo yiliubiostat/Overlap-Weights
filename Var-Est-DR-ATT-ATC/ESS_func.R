@@ -6,7 +6,7 @@
 ####### Effective sample sizes (ESS)
 
 ### by Yi Liu
-### Create date: Oct 9, 2021
+### Oct 9, 2021
 
 library(PSweight)
 library(dplyr)
@@ -41,16 +41,13 @@ ESS <- function(md_sim.data) {
     
     ess.ATT.1 <- c(ess.ATT.1, (sum(Z*1))^2 / sum((Z*1)^2) )
     ess.ATT.0 <- c(ess.ATT.0, (sum((1-Z)*(ps/(1-ps))))^2 / sum(((1-Z)*(ps/(1-ps)))^2) )
-    
   }
-  
   ESS <- data.frame(Z = c(0,1), 
                     IPW = c(mean(ess.IPW.0), mean(ess.IPW.1)), 
                     ATC = c(mean(ess.ATC.0), mean(ess.ATC.1)), 
                     ATT = c(mean(ess.ATT.0), mean(ess.ATT.1)) )
   
-  return(ESS)
-  
+  return(ESS) 
 }
 
 # For example,
