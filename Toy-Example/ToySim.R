@@ -69,17 +69,19 @@ df <- df %>% mutate(ps1=ps1, ps2=ps2)
 png("toy_ps1.png", res=72*2, width = 750, height = 400)
 ggplot(df, aes(x=ps1, color=as.factor(z1))) + 
   geom_density(size=1) +
-  labs(x="Propensity score", y="Density") + 
+  labs(x="Propensity score", y="") + 
   scale_color_manual(values=c("red", "blue"), name = "Group") + 
-  theme_classic()
+  theme(axis.text.y=element_blank())+ylab("") + 
+  scale_y_discrete(breaks=NULL) + theme_classic()
 dev.off()
 
 png("toy_ps2.png", res=72*2, width = 750, height = 400)
 ggplot(df, aes(x=ps2, color=as.factor(z2))) + 
   geom_density(size=1) +
-  labs(x="Propensity score", y="Density") + 
+  labs(x="Propensity score", y="") + 
   scale_color_manual(values=c("red", "blue"), name = "Group") + 
-  theme_classic()
+  theme(axis.text.y=element_blank())+ylab("") + 
+  scale_y_discrete(breaks=NULL) + theme_classic()
 dev.off()
 
 round(c(ATE, ATO1, ATM1, ATEN1, ATT1, ATC1), 2)
