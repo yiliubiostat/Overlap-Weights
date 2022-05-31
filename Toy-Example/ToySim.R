@@ -3,8 +3,7 @@
 ### ~~~~~~~~~~~~~~~~~~~~ Simulation Study          ~~~~~~~~~~~~~~~~~~~~ ###
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 
-####### Toy simulation for introduction
-
+### Toy example for illustration the impact of p=P(Z=1)
 ### by Yi Liu
 
 library(dplyr)
@@ -65,23 +64,22 @@ ATEN2 <- sum(delta*ksi2)/sum(ksi2)
 rm(u1,u2,ksi1,ksi2,delta)
 
 ### Propensity score plots
+### Propensity score plots
 df <- df %>% mutate(ps1=ps1, ps2=ps2)
-png("toy_ps1.png", res=72*2, width = 750, height = 400)
-ggplot(df, aes(x=ps1, color=as.factor(z1))) + 
-  geom_density(size=1) +
+png("toy_ps1.png", res=72*2, width = 850, height = 600)
+ggplot(df, aes(x=ps1, fill=as.factor(z1))) + 
+  geom_histogram(position="identity", alpha=0.5, color="black", bins=40) +
   labs(x="Propensity score", y="") + 
-  scale_color_manual(values=c("red", "blue"), name = "Group") + 
-  theme(axis.text.y=element_blank())+ylab("") + 
-  scale_y_discrete(breaks=NULL) + theme_classic()
+  scale_fill_manual(values=c("darkblue", "gray"), name = "Group") + 
+  theme_classic()
 dev.off()
 
-png("toy_ps2.png", res=72*2, width = 750, height = 400)
-ggplot(df, aes(x=ps2, color=as.factor(z2))) + 
-  geom_density(size=1) +
+png("toy_ps2.png", res=72*2, width = 850, height = 600)
+ggplot(df, aes(x=ps2, fill=as.factor(z2))) + 
+  geom_histogram(position="identity", alpha=0.5, color="black", bins=40) +
   labs(x="Propensity score", y="") + 
-  scale_color_manual(values=c("red", "blue"), name = "Group") + 
-  theme(axis.text.y=element_blank())+ylab("") + 
-  scale_y_discrete(breaks=NULL) + theme_classic()
+  scale_fill_manual(values=c("darkblue", "gray"), name = "Group") + 
+  theme_classic()
 dev.off()
 
 round(c(ATE, ATO1, ATM1, ATEN1, ATT1, ATC1), 2)
